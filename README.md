@@ -25,7 +25,7 @@
 - [x] Bridge emoji[^1]
 - [x] Seamlessly display user information
 
-[^1]: Revolt to Discord works, but limited to 3 emojis displayed to stop bombing with links. Animated emojis from Revolt will convert to static due to limits on Revolt's image backend
+[^1]: Discord to Revolt only
 
 ![Screenshot - Revolt](docs/discord.png) ![Screenshot - Discord](docs/revolt.png)
 
@@ -56,18 +56,17 @@ REVOLT_TOKEN = ...
 
 Of course, replace ... with tokens.
 
-If you are running a self-hosted instance of Revolt, additionally set the `API_URL` and `REVOLT_ATTACHMENT_URL` variable:
+If you are running a self-hosted instance of Revolt, additionally set the `API_URL` variable:
 
 ```
 API_URL = https://api.revolt.chat
-REVOLT_ATTACHMENT_URL = https://autumn.revolt.chat
 ```
 
 4. **Important!** Make sure to select the following permissions in URL Generator when making an invite for your bot (Your bot in Discord Developers -> `OAuth2` -> `URL Generator`) (or if you're lazy, just select `Administrator`) Note **applications.commands**!
 
 ![permissions](docs/permissions.png)
 
-5. Enable the `Message Content Intent` under Bot -> Privileged Gateway Intents. If you forget to do this, the bot will crash with a `Used disallowed intents` message.
+5. Enable the `Message Content Intent` under Bot -> Privileged Gateway Intents. If you forget to do this, the bridge will only work one way (from Revolt to Discord) and messages from Discord will be empty.
 
 ![intent](docs/intent.png)
 
@@ -189,18 +188,6 @@ Use either `rc!bots` or `/bots`
 ```
 
 ## 🔥 Troubleshooting <a id="troubleshooting"></a>
-
-### `npm install` takes way too long, or `Please install sqlite3 package manually` (Raspberry Pi / 32-bit arm devices)
-
-This is an issue with `node-sqlite3` being a native module, but has no prebuilt binaries for 32-bit arm architectures available, therefore falling back to building from source.
-
-However, a Raspberry Pi is usually too low powered to finish compiling it.
-
-So, the only solution would be to use a more powerful device to cross-compile it to arm. For convenience, a prebuilt binary for `armv7l` architecture was provided [here](https://github.com/mayudev/revcord/releases/download/v1.2/node_sqlite3.node)
-
-You have to place it in `node_modules/sqlite3/lib/binding/napi-v6-linux-glibc-arm/node_sqlite3.node`.
-
-Alternatively, if your device supports it (Raspberry Pi 3 does), you can install a 64-bit distribution.
 
 ### Messages sent to Discord have no content!
 

@@ -1,6 +1,5 @@
 import { Embed } from "discord.js";
 import type { SendableEmbed } from "revolt-api";
-import { fitOrEmpty, truncate } from "./truncate";
 
 interface Field {
   name: string;
@@ -64,7 +63,7 @@ export class RevcordEmbed {
 
     // Apply title
     if (this.title) {
-      result.title = truncate(this.title, 100);
+      content += "### " + this.title + "\n\n";
     }
 
     // I can't think of a better way to do this, so the image
@@ -77,9 +76,11 @@ export class RevcordEmbed {
 
     if (this.description) content += this.description + "\n\n";
 
-    if (this.iconURL) result.icon_url = fitOrEmpty(this.iconURL, 128);
+    if (this.author) result.title = this.author;
 
-    if (this.color) result.colour = fitOrEmpty(this.color, 128);
+    if (this.iconURL) result.icon_url = this.iconURL;
+
+    if (this.color) result.colour = this.color;
 
     if (this.footer) content += "\n> " + this.footer + "\n";
 
@@ -96,8 +97,7 @@ export class RevcordEmbed {
       content += fieldContent + "\n";
     });
 
-    // the offset is required for some reason. this needs to be investigated further
-    result.description = truncate(content, 1900);
+    result.description = content;
 
     return result;
   }
