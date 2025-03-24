@@ -1,4 +1,7 @@
+# Build directory
 build/
+
+# Mapping and database files
 mappings.json
 revcord.sqlite*
 
@@ -13,4 +16,4 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
-.env.local
+.env.local.env
