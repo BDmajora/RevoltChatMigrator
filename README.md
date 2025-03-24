@@ -4,3 +4,7 @@ RevoltChatMigrator is a bot that takes exported Discord messages and recreates t
 Run with:
 
 npm run start
+
+Run tests: 
+
+npm test
